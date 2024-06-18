@@ -8,9 +8,16 @@
 import Foundation
 import Combine
 
+enum CocktailFilter {
+    case all
+    case alcoholic
+    case nonAlcoholic
+}
+
 class CocktailBookListViewModel: ObservableObject {
     @Published var cocktails: [Cocktail] = []
     private var cancellables = Set<AnyCancellable>()
+    @Published var filteredCocktails: [Cocktail] = []
     private let cocktailsAPI = CocktailsAPI()
     
     func fetchCocktails() {
@@ -19,7 +26,9 @@ class CocktailBookListViewModel: ObservableObject {
                 do {
                     let cocktails = try JSONDecoder().decode([Cocktail].self, from: data)
                     DispatchQueue.main.async {
-                        self.cocktails = cocktails
+                        // Sort cocktails alphabetically by name
+                        self.cocktails = cocktails.sorted { $0.name < $1.name }
+
                     }
                 } catch {
                     print("Error decoding data: \(error)")
@@ -29,4 +38,15 @@ class CocktailBookListViewModel: ObservableObject {
             }
         }
     }
-}
+    func applyFilter(_ filter: CocktailFilter) {
+            switch filter {
+            case .all:
+                filteredCocktails = cocktails
+            case .alcoholic:
+                filteredCocktails = cocktails.filter { $0.type.lowercased() == "alcoholic" }
+            case .nonAlcoholic:
+                filteredCocktails = cocktails.filter { $0.type.lowercased() == "non-alcoholic" }
+            }
+        }
+    }
+

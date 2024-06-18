@@ -8,19 +8,30 @@
 import SwiftUI
 
 struct CocktailBookList: View {
-   
-@StateObject private var viewModel = CocktailBookListViewModel()
+    
+    @StateObject private var viewModel = CocktailBookListViewModel()
+    @State private var selectedFilter: CocktailFilter = .all
     
     var body: some View {
         NavigationView {
-            List(viewModel.cocktails) { cocktail in
-                NavigationLink(destination: CocktailDetailView(cocktail: cocktail)) {
-                    VStack(alignment: .leading) {
+            VStack {
+                Picker(selection: Binding(
+                    get: { self.selectedFilter },
+                    set: { newValue in
+                           self.selectedFilter = newValue
+                           self.viewModel.applyFilter(newValue)
+                         }
+                ), label: Text("Select Filter")) {
+                    Text("All Cocktails").tag(CocktailFilter.all)
+                    Text("Alcoholic").tag(CocktailFilter.alcoholic)
+                    Text("Non-Alcoholic").tag(CocktailFilter.nonAlcoholic)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                
+                List(viewModel.filteredCocktails) { cocktail in
+                    NavigationLink(destination: CocktailDetailView(cocktail: cocktail)) {
                         HStack {
-                            Image(cocktail.imageName)
-                                .resizable()
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
                             VStack(alignment: .leading) {
                                 Text(cocktail.name)
                                     .font(.headline)
@@ -29,21 +40,20 @@ struct CocktailBookList: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                        .padding(5)
-                        
                     }
                 }
                 
-            }
-            .navigationBarTitle("Cocktails", displayMode: .inline)
-            .onAppear {
-                viewModel.fetchCocktails()
+                .navigationBarTitle("Cocktails", displayMode: .inline)
             }
            
+        } .onAppear {
+            self.selectedFilter = .all
+            viewModel.fetchCocktails()
+            viewModel.applyFilter(selectedFilter)
         }
+        
     }
 }
-
 
 struct CocktailBookList_Previews: PreviewProvider {
     static var previews: some View {
