@@ -10,6 +10,7 @@ import SwiftUI
 struct CocktailBookList: View {
     @StateObject private var viewModel = CocktailBookListViewModel()
     @State private var selectedFilter: CocktailFilter = .all
+    
         private var navigationTitle: String {
             switch selectedFilter {
             case .all:
@@ -36,9 +37,9 @@ struct CocktailBookList: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
-                
+
                 List(viewModel.filteredCocktails) { cocktail in
-                    NavigationLink(destination: CocktailDetailView(cocktail: cocktail)) {
+                    NavigationLink(destination: CocktailDetailView(cocktail: cocktail, navigationTitle: navigationTitle)) {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(cocktail.name)
