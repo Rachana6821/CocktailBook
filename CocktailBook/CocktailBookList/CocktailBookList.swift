@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct CocktailBookList: View {
-    
     @StateObject private var viewModel = CocktailBookListViewModel()
-    @State private var selectedFilter: CocktailFilter = .all
-    
+    @State private var selectedFilter: CocktailFilter = .all // Step 1: Initialize with default value
+    // Define a computed property to dynamically compute the navigation title
+        private var navigationTitle: String {
+            switch selectedFilter {
+            case .all:
+                return "All Cocktails"
+            case .alcoholic:
+                return "Alcoholic Cocktails"
+            case .nonAlcoholic:
+                return "Non-Alcoholic Cocktails"
+            }
+        }
     var body: some View {
         NavigationView {
             VStack {
@@ -42,18 +51,16 @@ struct CocktailBookList: View {
                         }
                     }
                 }
-                
-                .navigationBarTitle("Cocktails", displayMode: .inline)
+                .navigationBarItems(leading: Text("\(navigationTitle)").font(.title))
             }
-           
-        } .onAppear {
-            self.selectedFilter = .all
+        }
+        .onAppear { // Step 2: Set initial value in onAppear
             viewModel.fetchCocktails()
             viewModel.applyFilter(selectedFilter)
         }
-        
     }
 }
+
 
 struct CocktailBookList_Previews: PreviewProvider {
     static var previews: some View {
