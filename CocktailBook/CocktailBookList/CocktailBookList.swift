@@ -9,8 +9,7 @@ import SwiftUI
 
 struct CocktailBookList: View {
     @StateObject private var viewModel = CocktailBookListViewModel()
-    @State private var selectedFilter: CocktailFilter = .all // Step 1: Initialize with default value
-    // Define a computed property to dynamically compute the navigation title
+    @State private var selectedFilter: CocktailFilter = .all
         private var navigationTitle: String {
             switch selectedFilter {
             case .all:
@@ -49,12 +48,15 @@ struct CocktailBookList: View {
                                     .foregroundColor(.gray)
                             }
                         }
+
                     }
                 }
+                .listStyle(.plain)
                 .navigationBarItems(leading: Text("\(navigationTitle)").font(.title))
             }
         }
-        .onAppear { // Step 2: Set initial value in onAppear
+        .onAppear {
+            selectedFilter = .all
             viewModel.fetchCocktails()
             viewModel.applyFilter(selectedFilter)
         }
