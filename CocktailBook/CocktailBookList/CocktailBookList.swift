@@ -46,26 +46,13 @@ struct CocktailBookList: View {
                     ///Navigation link to pass deails while navigating to the details screen
                     NavigationLink(destination: CocktailDetailView(cocktail: cocktail, navigationTitle: navigationTitle, viewModel: viewModel)) {
                         ///List View Cell Design
-                        //CustomCell(cocktail: cocktail,viewModel: viewModel)
-                        VStack(alignment: .leading) {
-                        HStack{
-                            if let index = viewModel.cocktails.firstIndex(where: { $0.id == cocktail.id }) {
-                                Text(cocktail.name)
-                                    .font(.headline)
-                                    .foregroundColor(viewModel.cocktails[index].isFavorite ? .purple : .black)
-                                Spacer()
-                                FavoriteButton(isFavorite: Binding(
-                                    get: { viewModel.cocktails[index].isFavorite},
-                                    set: { newValue in viewModel.cocktails[index].isFavorite = newValue }
-                                ), tag: viewModel.cocktails[index].id)
+                        if let index = viewModel.cocktails.firstIndex(where: { $0.id == cocktail.id }) {
+                                       CustomCell(cocktail: cocktail,
+                                       viewModel: viewModel,
+                                       viewModelFav:viewModel.cocktails[index].isFavorite,
+                                       index: index
+                            )
                             }
-                            
-                        }
-                        Text(cocktail.shortDescription)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                    }
-
                     }
                 }
                 .listStyle(.plain)
