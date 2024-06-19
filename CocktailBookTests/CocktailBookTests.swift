@@ -3,8 +3,27 @@ import XCTest
 
 class CocktailBookTests: XCTestCase {
 
+    let model = CocktailBookListViewModel()
+    
     override func setUpWithError() throws {
+        model.fetchCocktails()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+    
+    func testAPI() {
+        let expectation = XCTestExpectation(description: "sampleJson")
+        model.cocktailsAPI.fetchCocktails { result in
+            if case let .success(data) = result {
+                XCTAssertNotNil(data)
+                expectation.fulfill()
+            } else if case let .failure(error) = result {
+                XCTFail("Error fetching cocktails: \(error)")
+            }
+        }
+    }
+    
+    func testApplyFilter() {
+        XCTAssertNotNil(model.applyFilter(.all))
     }
 
     override func tearDownWithError() throws {

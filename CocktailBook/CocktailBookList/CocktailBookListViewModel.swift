@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+///Enum created for filter cases for reusing
 enum CocktailFilter {
     case all
     case alcoholic
@@ -18,7 +19,7 @@ class CocktailBookListViewModel: ObservableObject {
     @Published var cocktails: [Cocktail] = []
     private var cancellables = Set<AnyCancellable>()
     @Published var filteredCocktails: [Cocktail] = []
-    private let cocktailsAPI = CocktailsAPI()
+    let cocktailsAPI = CocktailsAPI()
 
     
     init() {
@@ -42,6 +43,7 @@ class CocktailBookListViewModel: ObservableObject {
                                 }
                             }
                         }
+                        //Adding customised coctail array to filtered array
                         self.filteredCocktails = self.cocktails
                     }
                 } catch {

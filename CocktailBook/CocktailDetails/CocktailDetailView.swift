@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct CocktailDetailView: View {
-    var cocktail: Cocktail
-    var navigationTitle: String
-    @Environment(\.presentationMode) var presentationMode 
-    @StateObject var viewModel = CocktailBookListViewModel()
-    
+    var cocktail: Cocktail //Instance of Cocktail Model
+    var navigationTitle: String //Navigation title based on the filter selected
+    @Environment(\.presentationMode) var presentationMode //Presentation mode in order to pop the screen on click of back
+    @StateObject var viewModel = CocktailBookListViewModel()//Instance of View model
+    ///Method to get index based on UUID of model
     func getIndex() -> Int {
         return viewModel.cocktails.firstIndex(where: ({$0.id == cocktail.id})) ?? 0
     }

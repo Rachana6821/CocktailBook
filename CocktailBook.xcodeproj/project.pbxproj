@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		803A0D192C21CB83004A6648 /* CocktailDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A0D182C21CB83004A6648 /* CocktailDetailView.swift */; };
 		803A0D1E2C221E12004A6648 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A0D1D2C221E12004A6648 /* FavoriteButton.swift */; };
+		803A0D222C22B7A0004A6648 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A0D212C22B7A0004A6648 /* CustomCell.swift */; };
 		804837BF2C21BD7B00374509 /* CocktailBookList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804837BE2C21BD7B00374509 /* CocktailBookList.swift */; };
 		804837C12C21BDA500374509 /* CocktailBookListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804837C02C21BDA500374509 /* CocktailBookListModel.swift */; };
 		804837C32C21BDF800374509 /* CocktailBookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804837C22C21BDF800374509 /* CocktailBookListViewModel.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		803A0D182C21CB83004A6648 /* CocktailDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDetailView.swift; sourceTree = "<group>"; };
 		803A0D1D2C221E12004A6648 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
+		803A0D212C22B7A0004A6648 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		804837BE2C21BD7B00374509 /* CocktailBookList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailBookList.swift; sourceTree = "<group>"; };
 		804837C02C21BDA500374509 /* CocktailBookListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailBookListModel.swift; sourceTree = "<group>"; };
 		804837C22C21BDF800374509 /* CocktailBookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailBookListViewModel.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				803A0D1D2C221E12004A6648 /* FavoriteButton.swift */,
+				803A0D212C22B7A0004A6648 /* CustomCell.swift */,
 			);
 			path = CustomComponents;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				804837C32C21BDF800374509 /* CocktailBookListViewModel.swift in Sources */,
 				804837BF2C21BD7B00374509 /* CocktailBookList.swift in Sources */,
 				803A0D1E2C221E12004A6648 /* FavoriteButton.swift in Sources */,
+				803A0D222C22B7A0004A6648 /* CustomCell.swift in Sources */,
 				E8324E7C262076EB00FD2124 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

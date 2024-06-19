@@ -27,7 +27,7 @@ struct CocktailBookList: View {
         NavigationView {
             ///Vertical Stack View which has segement control and list view
             VStack {
-                ///
+                ///Segement Controller which has 3 options
                 Picker(selection: Binding(
                     get: { self.selectedFilter },
                     set: { newValue in
@@ -41,36 +41,39 @@ struct CocktailBookList: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
+                ///List with Coctail names and short description with a favorite button
                 List(viewModel.filteredCocktails) { cocktail in
+                    ///Navigation link to pass deails while navigating to the details screen
                     NavigationLink(destination: CocktailDetailView(cocktail: cocktail, navigationTitle: navigationTitle, viewModel: viewModel)) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                HStack{
-                                    
-                                    if let index = viewModel.cocktails.firstIndex(where: { $0.id == cocktail.id }) {
-                                        Text(cocktail.name)
-                                            .font(.headline)
-                                            .foregroundColor(viewModel.cocktails[index].isFavorite ? .purple : .black)
-                                        Spacer()
-                                         FavoriteButton(isFavorite: Binding(
-                                            get: { viewModel.cocktails[index].isFavorite},
-                                            set: { newValue in viewModel.cocktails[index].isFavorite = newValue }
-                                        ), tag: viewModel.cocktails[index].id)
-                                    }
-                                    
-                                }
-                                Text(cocktail.shortDescription)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
+                        ///List View Cell Design
+                        //CustomCell(cocktail: cocktail,viewModel: viewModel)
+                        VStack(alignment: .leading) {
+                        HStack{
+                            if let index = viewModel.cocktails.firstIndex(where: { $0.id == cocktail.id }) {
+                                Text(cocktail.name)
+                                    .font(.headline)
+                                    .foregroundColor(viewModel.cocktails[index].isFavorite ? .purple : .black)
+                                Spacer()
+                                FavoriteButton(isFavorite: Binding(
+                                    get: { viewModel.cocktails[index].isFavorite},
+                                    set: { newValue in viewModel.cocktails[index].isFavorite = newValue }
+                                ), tag: viewModel.cocktails[index].id)
                             }
+                            
                         }
-                        
+                        Text(cocktail.shortDescription)
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+
                     }
                 }
                 .listStyle(.plain)
+                ///Title Displayed on the top of navigation bar
                 .navigationBarItems(leading: Text("\(navigationTitle)").font(.title))
             }
         }
+        ///Giving Default Data on View load
         .onAppear {
             selectedFilter = .all
             viewModel.fetchCocktails()
