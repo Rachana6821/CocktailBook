@@ -3,7 +3,7 @@ import SwiftUI
 struct CocktailDetailView: View {
     var cocktail: Cocktail
     var navigationTitle: String
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode 
     @StateObject var viewModel = CocktailBookListViewModel()
     
     func getIndex() -> Int {
@@ -62,8 +62,7 @@ struct CocktailDetailView: View {
     }
     
     private var favButton: some View  {
-        FavoriteButton(isFavorite: $viewModel.cocktails[getIndex()].isFavorite)
-    }
+        FavoriteButton(isFavorite: $viewModel.cocktails[getIndex()].isFavorite, tag: viewModel.cocktails[getIndex()].id)}
     
 }
 

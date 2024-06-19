@@ -1,5 +1,5 @@
 import Foundation
-
+///Model Created for Coctail API
 struct Cocktail: Identifiable, Decodable {
     let id: String
     var isFavorite: Bool = false
@@ -21,6 +21,9 @@ struct Cocktail: Identifiable, Decodable {
         case imageName
         case ingredients
     }
+    
+    ///Initialising the data from API
+    
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)

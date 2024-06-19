@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CocktailBookList: View {
-    @StateObject private var viewModel = CocktailBookListViewModel()
-    @State private var selectedFilter: CocktailFilter = .all
+    @StateObject private var viewModel = CocktailBookListViewModel()//Instance of viewmodel
+    @State private var selectedFilter: CocktailFilter = .all //Default selected filter
     
-    private var navigationTitle: String {
+    private var navigationTitle: String {// Navigation Title based on the selected filter
         switch selectedFilter {
         case .all:
             return "All Cocktails"
@@ -21,10 +21,13 @@ struct CocktailBookList: View {
             return "Non-Alcoholic Cocktails"
         }
     }
-    
+    /// View which shows the Filter and list of coctails based on filter segment selected.
     var body: some View {
+        ///Navigation View
         NavigationView {
+            ///Vertical Stack View which has segement control and list view
             VStack {
+                ///
                 Picker(selection: Binding(
                     get: { self.selectedFilter },
                     set: { newValue in
@@ -49,10 +52,10 @@ struct CocktailBookList: View {
                                             .font(.headline)
                                             .foregroundColor(viewModel.cocktails[index].isFavorite ? .purple : .black)
                                         Spacer()
-                                        FavoriteButton(isFavorite: Binding(
+                                         FavoriteButton(isFavorite: Binding(
                                             get: { viewModel.cocktails[index].isFavorite},
                                             set: { newValue in viewModel.cocktails[index].isFavorite = newValue }
-                                        ))
+                                        ), tag: viewModel.cocktails[index].id)
                                     }
                                     
                                 }

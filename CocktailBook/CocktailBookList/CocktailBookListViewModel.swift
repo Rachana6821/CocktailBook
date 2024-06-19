@@ -24,27 +24,37 @@ class CocktailBookListViewModel: ObservableObject {
     init() {
           fetchCocktails()
       }
-      
-      func fetchCocktails() {
-          cocktailsAPI.fetchCocktails { result in
-              if case let .success(data) = result {
-                  do {
-                      let cocktails = try JSONDecoder().decode([Cocktail].self, from: data)
-                      
-                      DispatchQueue.main.async {
-                          // Sort cocktails alphabetically by name
-                          self.cocktails = cocktails.sorted { $0.name < $1.name }
-                          self.filteredCocktails = self.cocktails
-                      }
-                  } catch {
-                      print("Error decoding data: \(error)")
-                  }
-              } else if case let .failure(error) = result {
-                  print("Error fetching data: \(error)")
-              }
-          }
-      }
+      ///Fetch Details from Cocktail API
 
+    func fetchCocktails() {
+        cocktailsAPI.fetchCocktails { result in
+            if case let .success(data) = result {
+                do {
+                    let cocktails = try JSONDecoder().decode([Cocktail].self, from: data)
+                    DispatchQueue.main.async {
+                        // Sort cocktails alphabetically by name
+                        self.cocktails = cocktails.sorted { $0.name < $1.name }
+                        //Adding to User Defaults for persistence
+                        if let array = UserDefaults.standard.object(forKey: "favorites") as? Array<String> {
+                            for (index, _) in self.cocktails.enumerated() {
+                                if array.contains(self.cocktails[index].id) {
+                                    self.cocktails[index].isFavorite = true
+                                }
+                            }
+                        }
+                        self.filteredCocktails = self.cocktails
+                    }
+                } catch {
+                    print("Error decoding data: \(error)")
+                }
+            } else if case let .failure(error) = result {
+                print("Error fetching data: \(error)")
+            }
+        }
+    }
+
+    /// Method to apply filter to the cocktails from json data
+    
     func applyFilter(_ filter: CocktailFilter) {
             switch filter {
             case .all:
