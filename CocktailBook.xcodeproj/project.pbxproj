@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		803A0D192C21CB83004A6648 /* CocktailDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A0D182C21CB83004A6648 /* CocktailDetailView.swift */; };
+		803A0D1E2C221E12004A6648 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A0D1D2C221E12004A6648 /* FavoriteButton.swift */; };
 		804837BF2C21BD7B00374509 /* CocktailBookList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804837BE2C21BD7B00374509 /* CocktailBookList.swift */; };
 		804837C12C21BDA500374509 /* CocktailBookListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804837C02C21BDA500374509 /* CocktailBookListModel.swift */; };
 		804837C32C21BDF800374509 /* CocktailBookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804837C22C21BDF800374509 /* CocktailBookListViewModel.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		803A0D182C21CB83004A6648 /* CocktailDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDetailView.swift; sourceTree = "<group>"; };
+		803A0D1D2C221E12004A6648 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		804837BE2C21BD7B00374509 /* CocktailBookList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailBookList.swift; sourceTree = "<group>"; };
 		804837C02C21BDA500374509 /* CocktailBookListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailBookListModel.swift; sourceTree = "<group>"; };
 		804837C22C21BDF800374509 /* CocktailBookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailBookListViewModel.swift; sourceTree = "<group>"; };
@@ -108,6 +110,14 @@
 			path = CocktailDetails;
 			sourceTree = "<group>";
 		};
+		803A0D1C2C221DF1004A6648 /* CustomComponents */ = {
+			isa = PBXGroup;
+			children = (
+				803A0D1D2C221E12004A6648 /* FavoriteButton.swift */,
+			);
+			path = CustomComponents;
+			sourceTree = "<group>";
+		};
 		E8324E6D262076EB00FD2124 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +142,7 @@
 		E8324E78262076EB00FD2124 /* CocktailBook */ = {
 			isa = PBXGroup;
 			children = (
+				803A0D1C2C221DF1004A6648 /* CustomComponents */,
 				803A0D172C21CB33004A6648 /* CocktailDetails */,
 				803A0D162C21CB0F004A6648 /* CocktailBookList */,
 				E8324E79262076EB00FD2124 /* AppDelegate.swift */,
@@ -312,6 +323,7 @@
 				E8324EAD2620774B00FD2124 /* MainScreenViewController.swift in Sources */,
 				804837C32C21BDF800374509 /* CocktailBookListViewModel.swift in Sources */,
 				804837BF2C21BD7B00374509 /* CocktailBookList.swift in Sources */,
+				803A0D1E2C221E12004A6648 /* FavoriteButton.swift in Sources */,
 				E8324E7C262076EB00FD2124 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,7 +496,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CocktailBook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,7 +517,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CocktailBook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

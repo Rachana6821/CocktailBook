@@ -11,25 +11,26 @@ struct CocktailBookList: View {
     @StateObject private var viewModel = CocktailBookListViewModel()
     @State private var selectedFilter: CocktailFilter = .all
     
-        private var navigationTitle: String {
-            switch selectedFilter {
-            case .all:
-                return "All Cocktails"
-            case .alcoholic:
-                return "Alcoholic Cocktails"
-            case .nonAlcoholic:
-                return "Non-Alcoholic Cocktails"
-            }
+    private var navigationTitle: String {
+        switch selectedFilter {
+        case .all:
+            return "All Cocktails"
+        case .alcoholic:
+            return "Alcoholic Cocktails"
+        case .nonAlcoholic:
+            return "Non-Alcoholic Cocktails"
         }
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
                 Picker(selection: Binding(
                     get: { self.selectedFilter },
                     set: { newValue in
-                           self.selectedFilter = newValue
-                           self.viewModel.applyFilter(newValue)
-                         }
+                        self.selectedFilter = newValue
+                        self.viewModel.applyFilter(newValue)
+                    }
                 ), label: Text("Select Filter")) {
                     Text("All Cocktails").tag(CocktailFilter.all)
                     Text("Alcoholic").tag(CocktailFilter.alcoholic)
@@ -37,19 +38,30 @@ struct CocktailBookList: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
-
                 List(viewModel.filteredCocktails) { cocktail in
-                    NavigationLink(destination: CocktailDetailView(cocktail: cocktail, navigationTitle: navigationTitle)) {
+                    NavigationLink(destination: CocktailDetailView(cocktail: cocktail, navigationTitle: navigationTitle, viewModel: viewModel)) {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(cocktail.name)
-                                    .font(.headline)
+                                HStack{
+                                    
+                                    if let index = viewModel.cocktails.firstIndex(where: { $0.id == cocktail.id }) {
+                                        Text(cocktail.name)
+                                            .font(.headline)
+                                            .foregroundColor(viewModel.cocktails[index].isFavorite ? .purple : .black)
+                                        Spacer()
+                                        FavoriteButton(isFavorite: Binding(
+                                            get: { viewModel.cocktails[index].isFavorite},
+                                            set: { newValue in viewModel.cocktails[index].isFavorite = newValue }
+                                        ))
+                                    }
+                                    
+                                }
                                 Text(cocktail.shortDescription)
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                             }
                         }
-
+                        
                     }
                 }
                 .listStyle(.plain)

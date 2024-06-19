@@ -19,25 +19,32 @@ class CocktailBookListViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     @Published var filteredCocktails: [Cocktail] = []
     private let cocktailsAPI = CocktailsAPI()
-    
-    func fetchCocktails() {
-        cocktailsAPI.fetchCocktails { result in
-            if case let .success(data) = result {
-                do {
-                    let cocktails = try JSONDecoder().decode([Cocktail].self, from: data)
-                    DispatchQueue.main.async {
-                        // Sort cocktails alphabetically by name
-                        self.cocktails = cocktails.sorted { $0.name < $1.name }
 
-                    }
-                } catch {
-                    print("Error decoding data: \(error)")
-                }
-            } else if case let .failure(error) = result {
-                print("Error fetching data: \(error)")
-            }
-        }
-    }
+    
+    init() {
+          fetchCocktails()
+      }
+      
+      func fetchCocktails() {
+          cocktailsAPI.fetchCocktails { result in
+              if case let .success(data) = result {
+                  do {
+                      let cocktails = try JSONDecoder().decode([Cocktail].self, from: data)
+                      
+                      DispatchQueue.main.async {
+                          // Sort cocktails alphabetically by name
+                          self.cocktails = cocktails.sorted { $0.name < $1.name }
+                          self.filteredCocktails = self.cocktails
+                      }
+                  } catch {
+                      print("Error decoding data: \(error)")
+                  }
+              } else if case let .failure(error) = result {
+                  print("Error fetching data: \(error)")
+              }
+          }
+      }
+
     func applyFilter(_ filter: CocktailFilter) {
             switch filter {
             case .all:
