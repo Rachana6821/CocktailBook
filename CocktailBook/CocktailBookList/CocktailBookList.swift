@@ -71,7 +71,7 @@ struct CocktailBookList: View {
                 viewModel.applyFilter(selectedFilter)
             }
             .alert(isPresented: $viewModel.showAlert) {
-                Alert(title: Text("Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
+            Alert(title: Text("Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
             }
         }
 }

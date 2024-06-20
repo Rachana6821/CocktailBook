@@ -20,6 +20,7 @@ class CocktailBookListViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     @Published var filteredCocktails: [Cocktail] = []//Empty Array to store filtered cocktails
     private let cocktailsAPI: CocktailsAPI = FakeCocktailsAPI()//Api instance
+    //let cocktailsAPI: CocktailsAPI = FakeCocktailsAPI(withFailure: .count(3))
     @Published var isLoading: Bool = false // Loading state
     @Published var showAlert: Bool = false // Alert state
     @Published var alertMessage: String = "" // Alert message
@@ -52,15 +53,20 @@ class CocktailBookListViewModel: ObservableObject {
                         self.filteredCocktails = self.cocktails
                     }
                 } catch {
-                    self.alertMessage = "Error decoding data: \(error.localizedDescription)"
-                    self.showAlert = true
-                    print("Error decoding data: \(error)")
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                        self.alertMessage = "Error decoding data: \(error.localizedDescription)"
+                        self.showAlert = true
+                        
+                    }
                 }
             } else if case let .failure(error) = result {
-                self.alertMessage = "Error fetching data: \(error.localizedDescription)"
-                self.showAlert = true
-                print("Error fetching data: \(error)")
-            }
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.alertMessage = "Error fetching data: \(error.localizedDescription)"
+                    self.showAlert = true
+                }
+                }
         }
     }
 
