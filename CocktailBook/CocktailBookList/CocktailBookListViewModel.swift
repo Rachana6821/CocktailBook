@@ -19,7 +19,7 @@ class CocktailBookListViewModel: ObservableObject {
     @Published var cocktails: [Cocktail] = []
     private var cancellables = Set<AnyCancellable>()
     @Published var filteredCocktails: [Cocktail] = []
-    let cocktailsAPI = CocktailsAPI()
+    private let cocktailsAPI: CocktailsAPI = FakeCocktailsAPI()
 
     
     init() {
