@@ -70,6 +70,9 @@ struct CocktailBookList: View {
                 viewModel.fetchCocktails()
                 viewModel.applyFilter(selectedFilter)
             }
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text("Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
+            }
         }
 }
 
