@@ -10,6 +10,7 @@
 		803A0D192C21CB83004A6648 /* CocktailDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A0D182C21CB83004A6648 /* CocktailDetailView.swift */; };
 		803A0D1E2C221E12004A6648 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A0D1D2C221E12004A6648 /* FavoriteButton.swift */; };
 		803A0D222C22B7A0004A6648 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A0D212C22B7A0004A6648 /* CustomCell.swift */; };
+		803A0D242C242D91004A6648 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803A0D232C242D91004A6648 /* LoaderView.swift */; };
 		804837BF2C21BD7B00374509 /* CocktailBookList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804837BE2C21BD7B00374509 /* CocktailBookList.swift */; };
 		804837C12C21BDA500374509 /* CocktailBookListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804837C02C21BDA500374509 /* CocktailBookListModel.swift */; };
 		804837C32C21BDF800374509 /* CocktailBookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804837C22C21BDF800374509 /* CocktailBookListViewModel.swift */; };
@@ -47,6 +48,7 @@
 		803A0D182C21CB83004A6648 /* CocktailDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDetailView.swift; sourceTree = "<group>"; };
 		803A0D1D2C221E12004A6648 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		803A0D212C22B7A0004A6648 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		803A0D232C242D91004A6648 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		804837BE2C21BD7B00374509 /* CocktailBookList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailBookList.swift; sourceTree = "<group>"; };
 		804837C02C21BDA500374509 /* CocktailBookListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailBookListModel.swift; sourceTree = "<group>"; };
 		804837C22C21BDF800374509 /* CocktailBookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailBookListViewModel.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				803A0D1D2C221E12004A6648 /* FavoriteButton.swift */,
 				803A0D212C22B7A0004A6648 /* CustomCell.swift */,
+				803A0D232C242D91004A6648 /* LoaderView.swift */,
 			);
 			path = CustomComponents;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				804837C12C21BDA500374509 /* CocktailBookListModel.swift in Sources */,
 				E8324EBF26207B2900FD2124 /* CocktailsAPI.swift in Sources */,
 				E8324ECC26207B9100FD2124 /* FakeCocktailsAPI.swift in Sources */,
+				803A0D242C242D91004A6648 /* LoaderView.swift in Sources */,
 				803A0D192C21CB83004A6648 /* CocktailDetailView.swift in Sources */,
 				E8324EC726207B6100FD2124 /* CocktailsAPIError.swift in Sources */,
 				E8324E7A262076EB00FD2124 /* AppDelegate.swift in Sources */,

@@ -20,7 +20,7 @@ class CocktailBookListViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     @Published var filteredCocktails: [Cocktail] = []
     private let cocktailsAPI: CocktailsAPI = FakeCocktailsAPI()
-
+    @Published var isLoading: Bool = false // Loading state
     
     init() {
           fetchCocktails()
@@ -28,11 +28,13 @@ class CocktailBookListViewModel: ObservableObject {
       ///Fetch Details from Cocktail API
 
     func fetchCocktails() {
+        self.isLoading = true
         cocktailsAPI.fetchCocktails { result in
             if case let .success(data) = result {
                 do {
                     let cocktails = try JSONDecoder().decode([Cocktail].self, from: data)
                     DispatchQueue.main.async {
+                        self.isLoading = false
                         // Sort cocktails alphabetically by name
                         self.cocktails = cocktails.sorted { $0.name < $1.name }
                         //Adding to User Defaults for persistence

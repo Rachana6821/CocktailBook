@@ -25,48 +25,52 @@ struct CocktailBookList: View {
     var body: some View {
         ///Navigation View
         NavigationView {
-            ///Vertical Stack View which has segement control and list view
-            VStack {
-                ///Segement Controller which has 3 options
-                Picker(selection: Binding(
-                    get: { self.selectedFilter },
-                    set: { newValue in
-                        self.selectedFilter = newValue
-                        self.viewModel.applyFilter(newValue)
+                ///Vertical Stack View which has segement control and list view
+                VStack {
+                    ///Segement Controller which has 3 options
+                    Picker(selection: Binding(
+                        get: { self.selectedFilter },
+                        set: { newValue in
+                            self.selectedFilter = newValue
+                            self.viewModel.applyFilter(newValue)
+                        }
+                    ), label: Text("Select Filter")) {
+                        Text("All Cocktails").tag(CocktailFilter.all)
+                        Text("Alcoholic").tag(CocktailFilter.alcoholic)
+                        Text("Non-Alcoholic").tag(CocktailFilter.nonAlcoholic)
                     }
-                ), label: Text("Select Filter")) {
-                    Text("All Cocktails").tag(CocktailFilter.all)
-                    Text("Alcoholic").tag(CocktailFilter.alcoholic)
-                    Text("Non-Alcoholic").tag(CocktailFilter.nonAlcoholic)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                ///List with Coctail names and short description with a favorite button
-                List(viewModel.filteredCocktails) { cocktail in
-                    ///Navigation link to pass deails while navigating to the details screen
-                    NavigationLink(destination: CocktailDetailView(cocktail: cocktail, navigationTitle: navigationTitle, viewModel: viewModel)) {
-                        ///List View Cell Design
-                        if let index = viewModel.cocktails.firstIndex(where: { $0.id == cocktail.id }) {
-                                       CustomCell(cocktail: cocktail,
-                                       viewModel: viewModel,
-                                       viewModelFav:viewModel.cocktails[index].isFavorite,
-                                       index: index
-                            )
+                    .pickerStyle(SegmentedPickerStyle())
+                    /// Show Loader in center if loading
+                    if viewModel.isLoading {
+                        LoaderView()
+                    }
+                    ///List with Coctail names and short description with a favorite button
+                    List(viewModel.filteredCocktails) { cocktail in
+                        ///Navigation link to pass deails while navigating to the details screen
+                        NavigationLink(destination: CocktailDetailView(cocktail: cocktail, navigationTitle: navigationTitle, viewModel: viewModel)) {
+                            ///List View Cell Design
+                            if let index = viewModel.cocktails.firstIndex(where: { $0.id == cocktail.id }) {
+                                CustomCell(cocktail: cocktail,
+                                           viewModel: viewModel,
+                                           viewModelFav:viewModel.cocktails[index].isFavorite,
+                                           index: index
+                                )
                             }
+                        }
                     }
+                    .listStyle(.plain)
+                    ///Title Displayed on the top of navigation bar
+                    .navigationBarItems(leading: Text("\(navigationTitle)").font(.title))
+                    
                 }
-                .listStyle(.plain)
-                ///Title Displayed on the top of navigation bar
-                .navigationBarItems(leading: Text("\(navigationTitle)").font(.title))
+            }
+            ///Giving Default Data on View load
+            .onAppear {
+                selectedFilter = .all
+                viewModel.fetchCocktails()
+                viewModel.applyFilter(selectedFilter)
             }
         }
-        ///Giving Default Data on View load
-        .onAppear {
-            selectedFilter = .all
-            viewModel.fetchCocktails()
-            viewModel.applyFilter(selectedFilter)
-        }
-    }
 }
 
 
